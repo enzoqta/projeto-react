@@ -1,7 +1,3 @@
-// Atv04.js
-// Todos os componentes da atividade em um único arquivo React
-// Obs: Código reescrito para não ficar idêntico ao site react.dev
-
 import { useState } from "react";
 
 export default function Atv04() {
@@ -105,7 +101,13 @@ function MovingDot() {
   return (
     <div
       onMouseMove={move}
-      style={{ width: 200, height: 150, background: "#ddd", position: "relative", marginBottom: 20 }}
+      style={{
+        width: 200,
+        height: 150,
+        background: "#ddd",
+        position: "relative",
+        marginBottom: 20,
+      }}
     >
       <div
         style={{
@@ -144,16 +146,26 @@ function Form2() {
 }
 
 function Form3() {
-  const [person, setPerson] = useState({ name: "", artwork: { title: "", city: "" } });
+  const [person, setPerson] = useState({
+    name: "",
+    artwork: { title: "", city: "" },
+  });
 
   function updateField(field, value) {
-    setPerson({ ...person, artwork: { ...person.artwork, [field]: value } });
+    setPerson({
+      ...person,
+      artwork: { ...person.artwork, [field]: value },
+    });
   }
 
   return (
     <div style={{ marginBottom: 20 }}>
       <h2>Form3</h2>
-      <input placeholder="Nome" value={person.name} onChange={(e) => setPerson({ ...person, name: e.target.value })} />
+      <input
+        placeholder="Nome"
+        value={person.name}
+        onChange={(e) => setPerson({ ...person, name: e.target.value })}
+      />
       <input
         placeholder="Título"
         value={person.artwork.title}
@@ -190,7 +202,8 @@ function List2() {
   const [items, setItems] = useState(["A", "B", "C"]);
 
   function add() {
-    setItems([...items, prompt("Novo item:")]);
+    const newItem = prompt("Novo item:");
+    if (newItem) setItems([...items, newItem]);
   }
 
   return (
@@ -211,14 +224,24 @@ function ShapeEditor() {
   ]);
 
   function toggle(id) {
-    setShapes(shapes.map((s) => (s.id === id ? { ...s, type: s.type === "circle" ? "square" : "circle" } : s)));
+    setShapes(
+      shapes.map((s) =>
+        s.id === id
+          ? { ...s, type: s.type === "circle" ? "square" : "circle" }
+          : s
+      )
+    );
   }
 
   return (
     <div style={{ marginBottom: 20 }}>
       <h2>ShapeEditor</h2>
       {shapes.map((s) => (
-        <div key={s.id} onClick={() => toggle(s.id)} style={{ cursor: "pointer" }}>
+        <div
+          key={s.id}
+          onClick={() => toggle(s.id)}
+          style={{ cursor: "pointer" }}
+        >
           {s.type}
         </div>
       ))}
@@ -291,7 +314,9 @@ function BucketList() {
 
   function toggle(id) {
     setItems(
-      items.map((i) => (i.id === id ? { ...i, done: !i.done } : i))
+      items.map((i) =>
+        i.id === id ? { ...i, done: !i.done } : i
+      )
     );
   }
 
@@ -299,4 +324,17 @@ function BucketList() {
     <div style={{ marginBottom: 20 }}>
       <h2>BucketList</h2>
       {items.map((i) => (
-        <div key={i
+        <div
+          key={i.id}
+          onClick={() => toggle(i.id)}
+          style={{
+            cursor: "pointer",
+            textDecoration: i.done ? "line-through" : "none",
+          }}
+        >
+          {i.text}
+        </div>
+      ))}
+    </div>
+  );
+}
